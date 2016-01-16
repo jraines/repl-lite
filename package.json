@@ -1,0 +1,24 @@
+{
+  "name": "repl-lite",
+  "main": "./lib/repl-lite",
+  "version": "0.1.0",
+  "description": "Bare bones client for Clojure nREPL",
+  "keywords": [
+    "clojure",
+    "clojurescript",
+    "repl",
+    "nREPL"
+  ],
+  "activationCommands": {
+    "atom-workspace": "repl-lite:toggle"
+  },
+  "repository": "https://github.com/jraines/repl-lite",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+    "underscore": "^1.8.3",
+    "nrepl-client": "~0.2.3"
+  }
+}
