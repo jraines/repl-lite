@@ -1,6 +1,7 @@
 ReplLiteView = require './repl-lite-view'
 _     = require('underscore')
 nrepl = require('nrepl-client')
+ReplLiteEditor = require('./repl-lite-editor')
 
 {CompositeDisposable} = require 'atom'
 
@@ -9,8 +10,18 @@ module.exports = ReplLite =
   modalPanel: null
   subscriptions: null
 
+
   activate: (state) ->
+    @connectToPort = (p) =>
+      @port = p
+      @conn = nrepl.connect({port: @port, verbose: false})
+      @conn.once 'connect', =>
+        @replEditor = new ReplLiteEditor(@conn)
+
+        @modalPanel.hide()
+
     @replLiteView = new ReplLiteView(state.replLiteViewState)
+    @replLiteView.onPortEntered(@connectToPort)
     @modalPanel = atom.workspace.addModalPanel(item: @replLiteView.getElement(), visible: false)
 
     # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
@@ -28,16 +39,6 @@ module.exports = ReplLite =
     replLiteViewState: @replLiteView.serialize()
 
   toggle: ->
-    @conn = nrepl.connect({port: 50882, verbose: false})
-    @conn.once 'connect', =>
-      @conn.eval "(+ 1 2)", (err, messages) =>
-        for m in messages
-          if m.ns?
-            txt = "#{m.ns}=> #{m.value}"
-            @replLiteView.update(txt)
-          else
-            console.log m.session.length
-
     if @modalPanel.isVisible()
       @modalPanel.hide()
     else

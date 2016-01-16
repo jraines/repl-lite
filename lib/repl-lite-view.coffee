@@ -1,15 +1,25 @@
+{Emitter} = require 'atom'
+
 module.exports =
 class ReplLiteView
   constructor: (serializedState) ->
     # Create root element
     @element = document.createElement('div')
     @element.classList.add('repl-lite')
+    @emitter = new Emitter()
 
-    # Create message element
-    message = document.createElement('div')
-    message.textContent = "The ReplLite package is Alive! It's ALIVE!"
-    message.classList.add('message')
-    @element.appendChild(message)
+    input = document.createElement('input')
+    input.classList.add('repl-port-input')
+    input.placeholder = "Enter Your nREPL port"
+    input.focus()
+    input.onkeyup = (e) =>
+      if e.which is 13
+        @emitter.emit "repl-lite:port-entered", e.target.value
+
+    @element.appendChild(input)
+
+  onPortEntered: (callback) ->
+    @emitter.on 'repl-lite:port-entered', callback
 
   update: (text) ->
     message = document.createElement('div')
