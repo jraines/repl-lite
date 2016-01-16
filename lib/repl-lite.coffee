@@ -28,7 +28,13 @@ module.exports = ReplLite =
     @subscriptions = new CompositeDisposable
 
     # Register command that toggles this view
-    @subscriptions.add atom.commands.add 'atom-workspace', 'repl-lite:toggle': => @toggle()
+    @subscriptions.add atom.commands.add 'atom-workspace',
+      'repl-lite:toggle': => @toggle()
+      'repl-lite:eval-selected': => @evalSelectedText()
+
+  evalSelectedText: ->
+    if editor = atom.workspace.getActiveTextEditor()
+      @replEditor.sendToRepl(editor.getSelectedText().trim())
 
   deactivate: ->
     @modalPanel.destroy()

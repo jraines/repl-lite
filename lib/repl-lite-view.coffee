@@ -11,12 +11,13 @@ class ReplLiteView
     input = document.createElement('input')
     input.classList.add('repl-port-input')
     input.placeholder = "Enter Your nREPL port"
-    input.focus()
     input.onkeyup = (e) =>
       if e.which is 13
         @emitter.emit "repl-lite:port-entered", e.target.value
 
     @element.appendChild(input)
+    input.focus()
+    input.value = "50882"
 
   onPortEntered: (callback) ->
     @emitter.on 'repl-lite:port-entered', callback
