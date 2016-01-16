@@ -2,6 +2,8 @@ module.exports =
 class ReplLiteEditor
   constructor: (conn) ->
     @conn = conn
+    @conn.clone (err, messages)=>
+      @session = messages[0]["new-session"]
     @ns = "user"
     atom.workspace.open("Clojure REPL", split:'right').done (textEditor) =>
       @textEditor = textEditor
@@ -25,7 +27,7 @@ class ReplLiteEditor
     @appendText("\n#{@ns}=> ")
 
   sendToRepl: (text) ->
-    @conn?.eval text, @ns, (err, messages) =>
+    @conn?.eval text, @ns, @session, (err, messages) =>
       for msg in messages
         if msg.err
           @appendText(msg.err)
