@@ -11,6 +11,12 @@ class ReplLiteView
     message.classList.add('message')
     @element.appendChild(message)
 
+  update: (text) ->
+    message = document.createElement('div')
+    message.textContent = text
+    message.classList.add('message')
+    @element.appendChild(message)
+
   # Returns an object that can be retrieved when package is activated
   serialize: ->
 

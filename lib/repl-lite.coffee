@@ -28,11 +28,15 @@ module.exports = ReplLite =
     replLiteViewState: @replLiteView.serialize()
 
   toggle: ->
-    console.log 'ReplLite was toggled!'
     @conn = nrepl.connect({port: 50882, verbose: false})
-    @conn.eval "(+ 1 2)", null, null, (err, messages) =>
-      for m in messages
-        console.log m
+    @conn.once 'connect', =>
+      @conn.eval "(+ 1 2)", (err, messages) =>
+        for m in messages
+          if m.ns?
+            txt = "#{m.ns}=> #{m.value}"
+            @replLiteView.update(txt)
+          else
+            console.log m.session.length
 
     if @modalPanel.isVisible()
       @modalPanel.hide()
