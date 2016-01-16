@@ -11,5 +11,6 @@
   'ctrl-r j': 'repl-lite:toggle'
   'ctrl-r e': 'repl-lite:eval-selected'
   'ctrl-r b': 'repl-lite:eval-block'
+  'ctrl-r p': 'repl-lite:pprint-last'
   'ctrl-r s': 'repl-lite:eval-sexp'
   'ctrl-r c': 'repl-lite:clear'

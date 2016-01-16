@@ -17,7 +17,6 @@ class ReplLiteView
 
     @element.appendChild(input)
     input.focus()
-    input.value = "50882"
 
   onPortEntered: (callback) ->
     @emitter.on 'repl-lite:port-entered', callback

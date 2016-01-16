@@ -35,6 +35,7 @@ module.exports = ReplLite =
       'repl-lite:eval-sexp': => @evalBlock()
       'repl-lite:eval-block': => @evalBlock({topLevel: true})
       'repl-lite:clear': => @replEditor.clear()
+      'repl-lite:pprint-last': => @replEditor.pprintLastVal()
 
   evalSelectedText: ->
     if editor = atom.workspace.getActiveTextEditor()

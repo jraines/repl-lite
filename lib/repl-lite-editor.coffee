@@ -23,15 +23,23 @@ class ReplLiteEditor
     @textEditor?.scrollToBottom()
 
   # Appends the namespace prompt
-  appendPrompt: ()->
-    @appendText("\n#{@ns}=> ")
+  appendPrompt: ->
+    @appendText("\n#{@ns}=>\n")
+
+  pprintLastVal: ->
+    @sendToRepl "(pprint #{@lastVal})"
+
 
   sendToRepl: (text) ->
     @conn?.eval text, @ns, @session, (err, messages) =>
       for msg in messages
+        console.log "msg from repl: ", msg
         if msg.err
           @appendText(msg.err)
+        else if msg.out
+          @appendText(msg.out)
         else if msg.value
+          @lastVal = msg.value
           @appendText(msg.value)
           @ns = msg.ns
       @appendPrompt()
