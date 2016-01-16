@@ -2,6 +2,7 @@ ReplLiteView = require './repl-lite-view'
 _     = require('underscore')
 nrepl = require('nrepl-client')
 ReplLiteEditor = require('./repl-lite-editor')
+EditorUtils = require('./editor-utils')
 
 {CompositeDisposable} = require 'atom'
 
@@ -31,11 +32,29 @@ module.exports = ReplLite =
     @subscriptions.add atom.commands.add 'atom-workspace',
       'repl-lite:toggle': => @toggle()
       'repl-lite:eval-selected': => @evalSelectedText()
+      'repl-lite:eval-sexp': => @evalBlock()
+      'repl-lite:eval-block': => @evalBlock({topLevel: true})
       'repl-lite:clear': => @replEditor.clear()
 
   evalSelectedText: ->
     if editor = atom.workspace.getActiveTextEditor()
       @replEditor.sendToRepl(editor.getSelectedText().trim())
+
+  evalBlock: (options={})->
+    if editor = atom.workspace.getActiveTextEditor()
+      if range = EditorUtils.getCursorInBlockRange(editor, options)
+        text = editor.getTextInBufferRange(range).trim()
+
+        # Highlight the area that's being executed temporarily
+        marker = editor.markBufferRange(range)
+        decoration = editor.decorateMarker(marker,
+            {type: 'highlight', class: "block-execution"})
+        # Remove the highlight after a short period of time
+        setTimeout(=>
+          marker.destroy()
+        , 350)
+
+        @replEditor.sendToRepl(text)
 
   deactivate: ->
     @modalPanel.destroy()

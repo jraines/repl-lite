@@ -8,6 +8,8 @@
 # For more detailed documentation see
 # https://atom.io/docs/latest/behind-atom-keymaps-in-depth
 'atom-workspace':
-  'ctrl-j': 'repl-lite:toggle'
-  'ctrl-alt-o': 'repl-lite:eval-selected'
-  'ctrl-alt-c': 'repl-lite:clear'
+  'ctrl-r j': 'repl-lite:toggle'
+  'ctrl-r e': 'repl-lite:eval-selected'
+  'ctrl-r b': 'repl-lite:eval-block'
+  'ctrl-r s': 'repl-lite:eval-sexp'
+  'ctrl-r c': 'repl-lite:clear'
