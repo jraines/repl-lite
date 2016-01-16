@@ -31,6 +31,7 @@ module.exports = ReplLite =
     @subscriptions.add atom.commands.add 'atom-workspace',
       'repl-lite:toggle': => @toggle()
       'repl-lite:eval-selected': => @evalSelectedText()
+      'repl-lite:clear': => @replEditor.clear()
 
   evalSelectedText: ->
     if editor = atom.workspace.getActiveTextEditor()

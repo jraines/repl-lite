@@ -12,8 +12,8 @@ class ReplLiteEditor
       @appendPrompt()
 
   clear: ->
-    "(+ 1 2 3)"
     @textEditor?.setText("")
+    @appendPrompt()
 
   appendText: (text)->
     text = "\n#{text}"

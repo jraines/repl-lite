@@ -10,3 +10,4 @@
 'atom-workspace':
   'ctrl-j': 'repl-lite:toggle'
   'ctrl-alt-o': 'repl-lite:eval-selected'
+  'ctrl-alt-c': 'repl-lite:clear'
