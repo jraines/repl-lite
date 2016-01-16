@@ -46,7 +46,10 @@ module.exports = ReplLite =
     replLiteViewState: @replLiteView.serialize()
 
   toggle: ->
-    if @modalPanel.isVisible()
-      @modalPanel.hide()
+    if @conn
+      @replEditor = new ReplLiteEditor(@conn)
     else
-      @modalPanel.show()
+      if @modalPanel.isVisible()
+        @modalPanel.hide()
+      else
+        @modalPanel.show()
