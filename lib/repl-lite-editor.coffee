@@ -12,6 +12,7 @@ class ReplLiteEditor
       @appendPrompt()
 
   clear: ->
+    "(+ 1 2 3)"
     @textEditor?.setText("")
 
   appendText: (text)->
@@ -26,7 +27,9 @@ class ReplLiteEditor
   sendToRepl: (text) ->
     @conn?.eval text, @ns, (err, messages) =>
       for msg in messages
-        if msg.value
+        if msg.err
+          @appendText(msg.err)
+        else if msg.value
           @appendText(msg.value)
           @ns = msg.ns
       @appendPrompt()
