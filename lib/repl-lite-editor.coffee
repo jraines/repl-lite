@@ -27,7 +27,8 @@ class ReplLiteEditor
     @appendText("\n#{@ns}=>\n")
 
   pprintLastVal: ->
-    @sendToRepl "(pprint #{@lastVal})"
+    console.log @lastVal
+    @sendToRepl "(pprint #{@lastCode})"
 
 
   sendToRepl: (text) ->
@@ -38,7 +39,7 @@ class ReplLiteEditor
         else if msg.out
           @appendText(msg.out)
         else if msg.value
-          @lastVal = msg.value
+          @lastCode = text 
           @appendText(msg.value)
           @ns = msg.ns
       @appendPrompt()
