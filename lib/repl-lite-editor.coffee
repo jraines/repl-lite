@@ -20,11 +20,17 @@ class ReplLiteEditor
   appendText: (text)->
     text = "\n#{text}"
     @textEditor?.getBuffer().append(text)
-    @textEditor?.scrollToBottom()
 
   # Appends the namespace prompt
   appendPrompt: ->
-    @appendText("\n#{@ns}=>\n")
+    @appendText("\n#{@ns}=> ")
+    @positionCursor()
+
+  positionCursor: ->
+    lastRow = @textEditor.getLastBufferRow()
+    @textEditor.setCursorBufferPosition [lastRow, 0]
+    @textEditor.moveToEndOfLine()
+    @textEditor.scrollToBottom()
 
   pprintLastVal: ->
     console.log @lastVal
@@ -39,7 +45,7 @@ class ReplLiteEditor
         else if msg.out
           @appendText(msg.out)
         else if msg.value
-          @lastCode = text 
+          @lastCode = text
           @appendText(msg.value)
           @ns = msg.ns
       @appendPrompt()
