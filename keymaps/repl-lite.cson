@@ -10,6 +10,7 @@
 'atom-workspace':
   'ctrl-r r': 'repl-lite:toggle'
   'ctrl-r j': 'repl-lite:eval-selected'
+  'ctrl-r l': 'repl-lite:set-last-code'
   'ctrl-r space': 'repl-lite:eval-block'
   'ctrl-r p': 'repl-lite:pprint-last'
   'ctrl-r i': 'repl-lite:eval-sexp'

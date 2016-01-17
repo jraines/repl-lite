@@ -33,9 +33,11 @@ class ReplLiteEditor
     @textEditor.scrollToBottom()
 
   pprintLastVal: ->
-    console.log @lastVal
     @sendToRepl "(pprint #{@lastCode})"
 
+  populateLastCode: ->
+    pos = @textEditor.getCursorBufferPosition()
+    @textEditor.setTextInBufferRange([pos, pos], @lastCode)
 
   sendToRepl: (text) ->
     @conn?.eval text, @ns, @session, (err, messages) =>

@@ -34,6 +34,7 @@ module.exports = ReplLite =
       'repl-lite:eval-selected': => @evalSelectedText()
       'repl-lite:eval-sexp': => @evalBlock()
       'repl-lite:eval-block': => @evalBlock({topLevel: true})
+      'repl-lite:set-last-code': => @replEditor.populateLastCode()
       'repl-lite:clear': => @replEditor.clear()
       'repl-lite:pprint-last': => @replEditor.pprintLastVal()
 
