@@ -1,6 +1,6 @@
 # repl-lite package
 
-This package is a stripped down version of [Jason Gilman's Proto REPL package](https//www.github.com/jasongilman/proto-repl).
+This package is a stripped down version of [Jason Gilman's Proto REPL package](https://www.github.com/jasongilman/proto-repl).
 
 Most of the stripping down is done in service of the ability to get into a ClojureScript REPL. (Proto-REPL has features
   which wrap code sent to the REPL in Clojure-only functions.)
