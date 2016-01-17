@@ -1,7 +1,7 @@
 {
   "name": "repl-lite",
   "main": "./lib/repl-lite",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Bare bones client for Clojure nREPL",
   "keywords": [
     "clojure",
