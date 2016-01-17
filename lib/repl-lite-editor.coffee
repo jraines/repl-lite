@@ -33,7 +33,6 @@ class ReplLiteEditor
   sendToRepl: (text) ->
     @conn?.eval text, @ns, @session, (err, messages) =>
       for msg in messages
-        console.log "msg from repl: ", msg
         if msg.err
           @appendText(msg.err)
         else if msg.out

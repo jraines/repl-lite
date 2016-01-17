@@ -8,9 +8,9 @@
 # For more detailed documentation see
 # https://atom.io/docs/latest/behind-atom-keymaps-in-depth
 'atom-workspace':
-  'ctrl-r j': 'repl-lite:toggle'
-  'ctrl-r e': 'repl-lite:eval-selected'
-  'ctrl-r b': 'repl-lite:eval-block'
+  'ctrl-r r': 'repl-lite:toggle'
+  'ctrl-r j': 'repl-lite:eval-selected'
+  'ctrl-r space': 'repl-lite:eval-block'
   'ctrl-r p': 'repl-lite:pprint-last'
-  'ctrl-r s': 'repl-lite:eval-sexp'
-  'ctrl-r c': 'repl-lite:clear'
+  'ctrl-r i': 'repl-lite:eval-sexp'
+  'ctrl-r [': 'repl-lite:clear'
